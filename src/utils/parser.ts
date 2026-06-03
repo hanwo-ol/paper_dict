@@ -6,7 +6,7 @@ export interface FileMetadata {
 }
 
 // Parse YAML-like frontmatter key-value pairs
-const parseFrontmatter = (yamlText: string) => {
+export const parseFrontmatter = (yamlText: string): Record<string, any> => {
   const result: Record<string, any> = {
     tags: [],
     aliases: []

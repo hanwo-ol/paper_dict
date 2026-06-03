@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useMemo, Fragment } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { FileNode } from '../utils/fileSystem';
 import { 
   Eye, Edit3, Columns, Check, Loader2, AlertCircle, Network, 
-  ChevronLeft, ChevronRight, Bold, Italic, Link, Code, Quote 
+  ChevronLeft, ChevronRight, Bold, Italic, Link, Code, Quote,
+  ChevronDown, ChevronUp, Calendar, Clock, Tag, Layers, Bookmark, Info
 } from 'lucide-react';
 import { GraphView } from './GraphView';
+import { parseFrontmatter } from '../utils/parser';
 
 interface EditorProps {
   selectedFile: FileNode;
@@ -30,6 +32,110 @@ interface EditorProps {
 type ViewMode = 'edit' | 'preview' | 'split' | 'graph';
 type RightPaneMode = 'preview' | 'graph';
 
+// Component to render parsed frontmatter metadata
+function MetadataPanel({ data }: { data: Record<string, any> }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const keys = Object.keys(data).filter(k => k !== 'title' && k !== 'outLinks');
+  if (keys.length === 0) return null;
+
+  // Helper to format field value
+  const renderValue = (key: string, val: any) => {
+    if (key === 'tags' && Array.isArray(val)) {
+      return (
+        <div className="flex flex-wrap gap-1">
+          {val.map((tag, idx) => (
+            <span key={idx} className="bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-full text-xs font-mono">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      );
+    }
+    if (key === 'aliases' && Array.isArray(val)) {
+      return (
+        <div className="flex flex-wrap gap-1">
+          {val.map((alias, idx) => (
+            <span key={idx} className="bg-gray-500/10 text-gray-400 border border-gray-500/20 px-2 py-0.5 rounded-md text-xs font-mono">
+              {alias}
+            </span>
+          ))}
+        </div>
+      );
+    }
+    if (Array.isArray(val)) {
+      return val.join(', ');
+    }
+    return String(val);
+  };
+
+  // Helper to get field icon
+  const getFieldIcon = (key: string) => {
+    switch (key.toLowerCase()) {
+      case 'created':
+        return <Calendar size={13} className="text-gray-400" />;
+      case 'updated':
+        return <Clock size={13} className="text-gray-400" />;
+      case 'tags':
+        return <Tag size={13} className="text-purple-450" />;
+      case 'aliases':
+        return <Layers size={13} className="text-blue-400" />;
+      case 'status':
+        return <Info size={13} className="text-yellow-450" />;
+      default:
+        return <Bookmark size={13} className="text-gray-400" />;
+    }
+  };
+
+  return (
+    <div className="mb-6 border border-obsidian-border rounded-xl bg-obsidian-sidebar/20 overflow-hidden transition-all shadow-sm">
+      {/* Header Toggle */}
+      <button 
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full px-4 py-2.5 flex items-center justify-between text-xs font-medium text-gray-405 hover:text-gray-200 hover:bg-obsidian-hover/40 transition-colors cursor-pointer select-none"
+      >
+        <div className="flex items-center gap-2">
+          <Info size={14} className="text-gray-400" />
+          <span>노트 메타데이터 ({keys.length}개 필드)</span>
+          {/* Quick preview of tags if collapsed */}
+          {!isExpanded && data.tags && Array.isArray(data.tags) && data.tags.length > 0 && (
+            <div className="hidden sm:flex items-center gap-1 ml-2">
+              {data.tags.slice(0, 3).map((t: string, i: number) => (
+                <span key={i} className="text-[10px] bg-purple-500/5 text-purple-400/80 px-1.5 py-0.2 rounded border border-purple-500/10">
+                  #{t}
+                </span>
+              ))}
+              {data.tags.length > 3 && <span className="text-[10px] text-gray-500">...</span>}
+            </div>
+          )}
+        </div>
+        <div className="text-gray-500 hover:text-gray-300">
+          {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+        </div>
+      </button>
+
+      {/* Expanded Fields */}
+      {isExpanded && (
+        <div className="px-4 pb-4 pt-1.5 border-t border-obsidian-border bg-obsidian-sidebar/10 flex flex-col gap-2 text-xs">
+          <div className="grid grid-cols-[120px_1fr] gap-x-4 gap-y-2.5 items-center">
+            {keys.map((key) => (
+              <Fragment key={key}>
+                <div className="flex items-center gap-2 text-gray-400 font-medium capitalize">
+                  {getFieldIcon(key)}
+                  <span>{key}</span>
+                </div>
+                <div className="text-gray-300 font-mono">
+                  {renderValue(key, data[key])}
+                </div>
+              </Fragment>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Editor({ 
   selectedFile, 
   value, 
@@ -45,6 +151,21 @@ export function Editor({
 }: EditorProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('split');
   const [rightPaneMode, setRightPaneMode] = useState<RightPaneMode>('preview');
+
+  // Split frontmatter and body content
+  const { frontmatter, bodyContentOnly } = useMemo(() => {
+    const fmMatch = value.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    if (fmMatch) {
+      try {
+        const parsed = parseFrontmatter(fmMatch[1]);
+        const body = value.substring(fmMatch[0].length);
+        return { frontmatter: parsed, bodyContentOnly: body };
+      } catch (e) {
+        console.error("Failed to parse YAML frontmatter in preview", e);
+      }
+    }
+    return { frontmatter: null, bodyContentOnly: value };
+  }, [value]);
   
   // Transform Wiki-links [[Note Name]] or [[Note Name|Alias]] into custom markdown links
   const transformWikiLinks = (text: string): string => {
@@ -55,7 +176,7 @@ export function Editor({
   };
 
   // Convert content for preview
-  const previewContent = transformWikiLinks(value);
+  const previewContent = useMemo(() => transformWikiLinks(bodyContentOnly), [bodyContentOnly]);
 
   // Custom renderer for ReactMarkdown components
   const markdownComponents = {
@@ -345,6 +466,7 @@ export function Editor({
         {viewMode === 'preview' && (
           <div className="h-full overflow-y-auto p-6 min-w-0 bg-obsidian-bg w-full">
             <div className="markdown-preview max-w-3xl mx-auto">
+              {frontmatter && <MetadataPanel data={frontmatter} />}
               {previewContent.trim() ? (
                 <ReactMarkdown 
                   remarkPlugins={[remarkGfm]}
@@ -390,6 +512,7 @@ export function Editor({
               {rightPaneMode === 'preview' ? (
                 <div className="flex-1 overflow-y-auto p-6">
                   <div className="markdown-preview">
+                    {frontmatter && <MetadataPanel data={frontmatter} />}
                     {previewContent.trim() ? (
                       <ReactMarkdown 
                         remarkPlugins={[remarkGfm]}
