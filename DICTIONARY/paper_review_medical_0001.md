@@ -1,7 +1,7 @@
 ---
 title: "paper_review_medical_0001"
 created: 2026-06-03 22:32:38
-updated: 2026-06-03 22:39:02
+updated: 2026-06-03 22:39:15
 type: "concept"
 status: "inbox"
 tags:
@@ -9,7 +9,7 @@ tags:
 aliases: []
 ---
 
-# 교수님 저서 읽고 메모
+# 논문 리뷰
 
 Thresholds for vestibular and cutaneous perception and oculomotor response induced by galvanic vestibular stimulation
 
