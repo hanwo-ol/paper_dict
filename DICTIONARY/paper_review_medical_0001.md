@@ -1,7 +1,7 @@
 ---
 title: "paper_review_medical_0001"
 created: 2026-06-03 22:32:38
-updated: 2026-06-03 22:39:38
+updated: 2026-06-03 22:40:02
 type: "concept"
 status: "inbox"
 tags:
@@ -14,7 +14,7 @@ aliases: []
 Nguyen TT, Kang J-J and Oh S-Y (2022) Thresholds for vestibular and cutaneous perception and oculomotor response induced by galvanic vestibular stimulation. Front. Neurol. 13:955088. doi: 10.3389/fneur.2022.955088
 
 ## 개요
-> 이 노트의 핵심 정의나 한 줄 요약을 작성하세요.
+> 연구실 오선영 교수님 논문 읽고 메모
 
 ## 연관 노트
 * 상위 주제: [[상위 주제 노트]]
