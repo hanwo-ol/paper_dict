@@ -1,0 +1,11 @@
+# 옵시디언 클론 프로젝트 (Vibe Coding) 통합 규칙 가이드
+
+이 워크스페이스는 '옵시디언(Obsidian)' 형태의 지식 사전 웹 앱을 Vibe Coding으로 개발하는 프로젝트입니다.
+작업 시 항상 아래 경로에 정의된 세부 규칙 문서들을 최우선적으로 참고하고 모든 원칙을 준수해야 합니다.
+
+1. **대화 규칙:** [COMMUNICATION_RULES.md](file:///c:/Users/11015/obs/AGENTS/RULES/COMMUNICATION_RULES.md)
+   - 답변은 짧고 명확하게 한국어로 작성하며, 임의의 추측 대신 확인용 질문을 활용할 것.
+2. **문서 작성 규칙:** [DOCUMENTATION_RULES.md](file:///c:/Users/11015/obs/AGENTS/RULES/DOCUMENTATION_RULES.md)
+   - 중요한 계획과 진행 상태는 아티팩트로 관리하고, 체크리스트(`[ ]`)와 파일 링크를 적극 활용할 것.
+3. **코딩 규칙:** [CODING_RULES.md](file:///c:/Users/11015/obs/AGENTS/RULES/CODING_RULES.md)
+   - React + Vite 스택을 기반으로 로컬 우선(File System Access API) 데이터 관리를 지향하고 모듈화된 다크 모드 UI를 구축할 것.
