@@ -1,7 +1,7 @@
 ---
 title: "paper_review_medical_0001"
 created: 2026-06-03 22:32:38
-updated: 2026-06-03 22:38:55
+updated: 2026-06-03 22:39:02
 type: "concept"
 status: "inbox"
 tags:
@@ -23,4 +23,3 @@ Thresholds for vestibular and cutaneous perception and oculomotor response induc
 
 ## 본문
 * 내용을 작성하고 관련 단어는 [[다른 노트]] 형태로 연결해 보세요.
-교수저
