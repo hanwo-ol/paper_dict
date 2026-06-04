@@ -1,7 +1,7 @@
 ---
 title: "questions"
 created: 2026-06-04 10:24:01
-updated: 2026-06-04 10:28:11
+updated: 2026-06-04 10:28:25
 type: "tips"
 status: "seed"
 tags:
@@ -18,5 +18,5 @@ aliases: []
 * 상위 주제: [[없음]]
 * 관련 노트: [[없음]]
 
-## 본문
+## 기본적인 7 질
 * 
