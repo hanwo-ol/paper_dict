@@ -1,7 +1,7 @@
 ---
 title: "questions"
 created: 2026-06-04 10:24:01
-updated: 2026-06-04 11:03:39
+updated: 2026-06-04 11:03:46
 type: "tips"
 status: "seed"
 tags:
@@ -59,7 +59,7 @@ Outcome: 어떤 결과 지표를 봤는가?
 **추적 탈락(loss to follow-up)**이 얼마나 되고, 군 간 차이가 있는가? (보통 20% 넘으면 의심)
 ITT(intention-to-treat) vs per-protocol 중 무엇으로 분석했는가? (ITT가 무작위화의 이점을 보존)
 
-D. 결과 지표의 질 (Outcomes / Endpoints)
+### D. 결과 지표의 질 (Outcomes / Endpoints)
 
 **일차/이차 평가변수(primary/secondary endpoint)**가 사전에 정해졌는가?
 단단한 임상 결과(hard outcome: 사망, 심근경색) 인가, 아니면 대리지표(surrogate: LDL, HbA1c, 종양 크기) 인가? 대리지표라면 임상적 의미가 검증된 것인가?
