@@ -1,7 +1,7 @@
 ---
 title: "questions"
 created: 2026-06-04 10:24:01
-updated: 2026-06-04 11:03:12
+updated: 2026-06-04 11:03:39
 type: "tips"
 status: "seed"
 tags:
@@ -35,12 +35,13 @@ aliases: []
 (5) 논증 구조 — 주장→근거→반론→재반론의 흐름이 있는가    
 (6) 결론이 연구 질문에 대한 답변으로 귀결되는가      
 
-A. 연구 설계 (Study Design)
+## 임상 논문에서의 질문들
+### A. 연구 설계 (Study Design)
 
 이 연구는 어떤 설계인가? (RCT / 코호트 / 환자-대조 / 단면 / 증례군 / 체계적 고찰·메타분석) 그리고 근거 수준(evidence hierarchy) 상 어디에 위치하는가?
 연구 질문이 인과(causation)를 묻는데 설계가 그걸 뒷받침하는가? (단면연구로 인과를 주장하면 과대해석)
 
-B. 임상 질문 구조 (PICO)
+### B. 임상 질문 구조 (PICO)
 임상 논문은 거의 항상 PICO로 분해됩니다.
 
 Population: 어떤 환자인가? 포함/배제 기준(inclusion/exclusion)이 명확한가?
@@ -48,7 +49,7 @@ Intervention: 중재가 정확히 무엇인가? (용량, 기간, 시행 주체)
 Comparison: 비교군이 무엇인가? (위약 vs 표준치료 vs 무처치 — 비교군 선택이 결과 해석을 좌우)
 Outcome: 어떤 결과 지표를 봤는가?
 
-C. 비뚤림 통제 — 내적 타당도 (Bias / Internal Validity)
+### C. 비뚤림 통제 — 내적 타당도 (Bias / Internal Validity)
 임상 논문에서 가장 핵심적인 비판 지점입니다.
 
 무작위 배정(randomization)과 **배정 은폐(allocation concealment)**가 제대로 됐는가?
