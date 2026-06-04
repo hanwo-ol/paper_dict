@@ -1,8 +1,8 @@
 ---
 title: "questions"
 created: 2026-06-04 10:24:01
-updated: 2026-06-04 10:24:01
-type: "concept"
+updated: 2026-06-04 10:24:58
+type: "tips"
 status: "inbox"
 tags:
   - "inbox"
