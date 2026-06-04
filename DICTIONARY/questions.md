@@ -1,11 +1,11 @@
 ---
 title: "questions"
 created: 2026-06-04 10:24:01
-updated: 2026-06-04 10:24:58
+updated: 2026-06-04 10:25:16
 type: "tips"
-status: "inbox"
+status: "seed"
 tags:
-  - "inbox"
+  - "seed"
 aliases: []
 ---
 
