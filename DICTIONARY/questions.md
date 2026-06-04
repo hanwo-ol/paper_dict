@@ -1,7 +1,7 @@
 ---
 title: "questions"
 created: 2026-06-04 10:24:01
-updated: 2026-06-04 11:05:02
+updated: 2026-06-04 11:05:31
 type: "tips"
 status: "seed"
 tags:
@@ -42,7 +42,6 @@ aliases: []
 연구 질문이 인과(causation)를 묻는데 설계가 그걸 뒷받침하는가? (단면연구로 인과를 주장하면 과대해석)
 
 ### B. 임상 질문 구조 (PICO)
-임상 논문은 거의 항상 PICO로 분해됩니다.
 
 Population: 어떤 환자인가? 포함/배제 기준(inclusion/exclusion)이 명확한가?
 Intervention: 중재가 정확히 무엇인가? (용량, 기간, 시행 주체)
